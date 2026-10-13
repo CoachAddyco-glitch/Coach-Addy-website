@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ASC · Naren Kundalia · 4-Week Coaching Dashboard</title>
+<style>
+:root{--bg:#111316;--c:#1a1d22;--c2:#23272e;--ln:#2f343c;--tx:#eceef1;--mu:#9aa1ab;--ac:#e2b13c;--ac2:#ff7a45;--ok:#4cc38a;--bad:#ff5d5d}
+*{box-sizing:border-box}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,"Segoe UI",Roboto,sans-serif}
+header{padding:22px 18px 12px;background:linear-gradient(135deg,#1b1e24,#101215);border-bottom:2px solid var(--ac)}
+.brand{font-size:26px;font-weight:800;letter-spacing:.18em;color:var(--ac)}.tag0{color:var(--mu);font-size:13px;letter-spacing:.08em}
+.hrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:4px;overflow-x:auto;background:#0d0f11;padding:6px 10px;border-bottom:1px solid var(--ln)}
+nav button{flex:1;min-width:110px}main{max-width:1100px;margin:0 auto;padding:16px}
+.tab{display:none}.tab.on{display:block}
+h2{color:var(--ac);margin:6px 0 12px}h3,h4{margin:0 0 8px}
+.card,.ex,.ni{background:var(--c);border:1px solid var(--ln);border-radius:12px;padding:14px;margin-bottom:12px}
+.ex.off,.ni.off{opacity:.5}.ex{border-left:4px solid var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.wide{grid-column:1/-1}
+label{display:flex;flex-direction:column;font-size:12px;color:var(--mu);gap:3px}
+input,select,textarea{background:#0f1114;color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:10px;font:inherit;min-height:44px;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--ac)}
+label.ck{flex-direction:row;align-items:center;gap:8px;color:var(--tx);font-size:14px;min-height:44px}label.ck input{width:22px;min-height:22px}
+.btn,nav button{background:var(--c2);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:10px 14px;min-height:44px;cursor:pointer;font:inherit}
+.btn:hover,nav button:hover{border-color:var(--ac)}.btn.pri,nav button.on{background:var(--ac);color:#111;font-weight:700;border-color:var(--ac)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.muted{color:var(--mu);font-size:13px;margin:4px 0}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;letter-spacing:.06em}
+.b-coach{background:#3a2a10;color:var(--ac)}.b-client{background:#12332a;color:var(--ok)}
+.tag{font-size:11px;padding:2px 8px;border-radius:99px;background:var(--c2);margin-left:6px}.tag.warn{background:#4a2410;color:var(--ac2)}
+.alert{border:1px solid var(--ac2);background:#2b1a12;border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.note{border:1px solid var(--ac);background:#2a2412;border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.pres{color:var(--ac);font-size:14px;margin-bottom:4px}.pres b{color:#fff}
+.out{font-size:13px;color:var(--ok);margin:6px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}
+.stat{background:var(--c2);border-radius:10px;padding:10px}.stat b{display:block;font-size:20px;color:var(--ac)}.stat span{font-size:12px;color:var(--mu)}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px solid var(--ln);padding:8px;text-align:left;vertical-align:top}th{color:var(--ac);white-space:nowrap}
+svg{width:100%;height:auto}.gl{stroke:var(--ln)}.ax{fill:var(--mu);font-size:10px}.ln{stroke:var(--ac);fill:none;stroke-width:2.5}.dt{fill:var(--ac2)}.bar{fill:var(--ac)}.lb{fill:var(--tx);font-size:10px}
+details summary{cursor:pointer;color:var(--ac);font-size:13px;margin:6px 0}
+footer{max-width:1100px;margin:0 auto;padding:16px;color:var(--mu);font-size:12px}
+body:not(.coach) .coachonly{display:none}body.coach .clientonly{display:none}
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:12px}.wk{background:var(--c);border:1px solid var(--ln);border-top:4px solid var(--ac);border-radius:12px;padding:14px}.wk h4{color:var(--ac);display:flex;justify-content:space-between}.wk h5{margin:12px 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}.wk p{margin:2px 0;font-size:13px}.pb{height:8px;background:#0f1114;border-radius:99px;overflow:hidden;margin:4px 0 6px}.pb i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ok))}.cn{font-size:12px;color:var(--mu);border-top:1px solid var(--ln);margin-top:10px;padding-top:8px}svg{max-width:100%}.sr{display:grid;grid-template-columns:48px 1fr 1fr 1fr;gap:8px;align-items:end;margin-top:8px}.sr b{padding-bottom:12px;color:var(--ac)}
+@media(max-width:560px){.grid3{grid-template-columns:1fr}.brand{font-size:20px}}
+@media print{body{background:#fff;color:#000}header,main,footer{color:#000}nav,.noprint,.coachonly,.btn,form,details{display:none!important}
+.tab{display:block!important}.card,.ex,.ni{background:#fff;border:1px solid #bbb;break-inside:avoid}.pres,h2,.brand{color:#8a5d00}.pres b{color:#000}
+input,select,textarea{background:#fff;color:#000;border:1px solid #999}header{background:#fff}.out,.stat b{color:#000}.stat{background:#f2f2f2}th{color:#000}.alert,.note{background:#fff;color:#000}.muted,label{color:#444}.bar{fill:#8a5d00}.ln{stroke:#8a5d00}.ax,.lb{fill:#000}}
+</style></head><body class="coach">
+<header><div class="brand">ADDY STRENGTH CO</div><div class="tag0">Personalized Training • Nutrition • Progress</div>
+<div style="margin-top:8px"><b>Client:</b> Naren Kundalia · <b>Program:</b> 4-week block · <b>Coach version</b></div>
+<div class="hrow noprint"><label class="ck"><input type="checkbox" data-p="coach" id="cm"> Coach mode</label>
+<button class="btn" data-act="exp">Export JSON</button><button class="btn" data-act="imp">Import JSON</button><input type="file" id="fi" accept=".json" hidden>
+<button class="btn pri" data-act="prt">Print / Save PDF</button><button class="btn" data-act="rst">Reset</button></div></header>
+<nav id="nav"></nav><main id="app"></main>
+<footer><b>Privacy:</b> This dashboard contains personal and health-related information. Data is saved only in this browser on this device (localStorage) and is NOT uploaded or automatically synced to the coach. Use Export JSON to share a backup privately. Do not post this file or exports in public places. This tool supports coaching decisions; it does not diagnose, treat or cure any condition. Calorie and macro values are provisional estimates unless label data is entered.</footer>
+<script>
+const CLIENT=false;
+const KEY='asc_naren_v1',TODAY=new Date().toISOString().slice(0,10);
+const I=(n,q,u,b,k,p,c,f,$,cat)=>({n,q,bq:q,u,b,k,p,c,f,$,e:'Estimate',on:1,cat});
+const X=(n,s,r,rir,rest,cue,alt,hip)=>({n,s,r,rir,rest,cue,alt,on:1,hip:hip?1:0});
+const SUBS={chicken:[['Chicken (raw)',100,'g','raw',120,22,0,2.6,25],['Fish, rohu (raw)',100,'g','raw',97,17,0,3,22],['Soya chunks (dry)',30,'g','raw',104,16,10,.4,6],['Egg whites',4,'pc','each',68,14,1,.2,10]],
+eggs:[['Eggs (whole)',2,'pc','each',143,12.6,.7,9.5,14],['Egg whites',4,'pc','each',68,14,1,.2,10],['Paneer',60,'g','raw',159,11,2,12,24]],
+paneer:[['Paneer',100,'g','raw',265,18,3.5,20,40],['Tofu',100,'g','raw',76,8,2,4.8,25],['Soya chunks (dry)',40,'g','raw',139,21,13,.5,8],['Chicken (raw)',100,'g','raw',120,22,0,2.6,25]],
+dal:[['Dal (cooked)',150,'g','cooked',170,9,25,3,8],['Rajma (cooked)',150,'g','cooked',190,12,32,1,10],['Chana (cooked)',150,'g','cooked',240,13,40,4,10]],
+rice:[['Cooked rice',250,'g','cooked',325,6.8,70,.7,8],['Roti (atta, dry wt)',100,'g','raw',340,12,70,2,6]],
+atta:[['Atta for rotis (dry wt)',60,'g','raw',205,7,42,1.2,4],['Cooked rice',150,'g','cooked',195,4,42,.4,5]],
+curd:[['Plain curd',150,'g','cooked',90,5.5,7,4.5,8],['Hung curd',150,'g','cooked',110,13,6,3,15]],
+veg:[['Sabzi (cooked)',150,'g','cooked',90,3,12,3,12],['Green salad',150,'g','raw',30,2,6,.3,8]]};
+const mk=(c,j)=>I(...SUBS[c][j],c);
+const SUG=[['Cooked rice 50 g (Lunch)',1,()=>I('Cooked rice (added)',50,'g','cooked',65,1.4,14,.1,2)],['1 roti, 30 g atta (Dinner)',3,()=>I('Atta for 1 roti',30,'g','raw',102,3.5,21,.6,2)],['Banana (Pre-workout)',2,()=>I('Banana (added)',1,'pc','each',105,1.3,27,.4,6)],['Measured oil 5 g (Dinner)',3,()=>I('Cooking oil (added)',5,'g','as-is',45,0,0,5,1.5)]];
+function defaults(){const prot=I('Mixed protein powder (enter label data)',30,'g','as-is',0,0,0,0,0);prot.on=0;
+return{coach:1,week:1,day:1,start:'',notes:'',cx:'',ex:{
+1:[X('Cable triceps pushdown',3,'10–15','2','60–90s','Elbows pinned, full lockout','Rope pushdown'),X('EZ-bar curl',3,'8–12','2','60–90s','No swinging, full range','Dumbbell curl'),X('Overhead cable triceps extension',2,'12–15','2','60s','Only if comfortable; ribs down','Single-arm pushdown',1),X('Incline dumbbell curl',2,'10–15','1–2','60s','Stretch at bottom','Cable curl'),X('Incline dumbbell press',3,'6–10','2','90–120s','Control down, press up','Machine incline press'),X('Machine chest press',2,'8–12','2','90s','Shoulders back and down','Flat dumbbell press'),X('Cable lateral raise',2,'12–20','1–2','60s','Lead with elbow','Dumbbell lateral raise')],
+2:[X('Leg extension',3,'10–15','2–3','60–90s','Pause at top; smooth tempo','Reduce range if painful'),X('Seated leg curl',3,'10–15','2','60–90s','Full squeeze, slow return','Lying leg curl'),X('Leg press',2,'10–15','3','90s','Only in a clinician-approved comfortable range','Clinician-approved alternative',1),X('Glute bridge',2,'10–15','2–3','60s','Only if tolerated and approved','Clinician-approved alternative',1),X('Standing calf raise',3,'10–15','2','60s','Full stretch and pause','Seated calf raise'),X('Dead bug or comfortable core exercise',2,'8–12 per side','2','45–60s','Low back stays flat','Plank')],
+3:[X('Neutral-grip lat pulldown',3,'8–12','2','90s','Drive elbows to hips','Assisted pull-up'),X('Chest-supported row',3,'8–12','2','90s','Squeeze shoulder blades','Machine row'),X('Seated cable row',2,'10–15','2','60–90s','Tall posture, no rocking','One-arm cable row'),X('Reverse pec deck / cable rear-delt fly',2,'12–20','1–2','60s','Light load, wide arc','Dumbbell rear-delt fly'),X('Preacher curl',3,'8–12','1–2','60–90s','Do not drop the bottom hard','EZ-bar curl'),X('Rope hammer curl',2,'10–15','1–2','60s','Neutral grip, elbows still','Dumbbell hammer curl')],
+4:[X('Flat dumbbell or machine chest press',3,'6–10','2','90–120s','Controlled lowering','Machine chest press'),X('Incline machine or dumbbell press',2,'8–12','2','90s','Slight incline','Incline dumbbell press'),X('Cable or dumbbell lateral raise',3,'12–20','1–2','60s','No shrugging','Cable lateral raise'),X('Reverse pec deck',2,'12–20','2','60s','Slow return','Cable rear-delt fly'),X('Cable triceps pushdown',3,'10–15','1–2','60s','Full lockout','Rope pushdown'),X('Single-arm cable triceps extension',2,'12–15','2','60s','Elbow steady','Overhead extension (if comfortable)')],
+5:[X('Seated leg curl',3,'10–15','2','60–90s','Slow return','Lying leg curl'),X('Leg extension',2,'12–15','2–3','60s','Pain-free range only','Reduce range'),X('Clinician-approved hip-tolerant glute exercise',2,'10–15','3','60–90s','Coach and clinician choose the movement','Enter approved substitution',1),X('Standing or seated calf raise',3,'12–20','2','45–60s','Pause at stretch','Seated calf raise'),X('Cable curl',2,'12–15','2','60s','Elbows still','Dumbbell curl'),X('Rope triceps pushdown',2,'12–15','2','60s','Split rope at bottom','Straight-bar pushdown')]},
+lg:{},sn:{},
+meals:[{n:'Meal 1 — Breakfast',t:'≈ 7:30 AM',note:'',items:[I('Oats or muesli',50,'g','raw',190,6.5,33,3.5,8),I('Milk',200,'ml','as-is',120,6.5,9.5,6,12),I('Banana',1,'pc','each',105,1.3,27,.4,6),mk('eggs',0),prot]},
+{n:'Meal 2 — Lunch',t:'≈ 12:30–1:30 PM',note:'',items:[mk('rice',0),mk('chicken',0),mk('dal',0),mk('veg',0),I('Cooking oil (measured)',10,'g','as-is',90,0,0,10,3)]},
+{n:'Meal 3 — Pre-workout',t:'≈ 3:00 PM',note:'',items:[I('Banana',1,'pc','each',105,1.3,27,.4,6),mk('curd',0)]},
+{n:'Meal 4 — Dinner',t:'≈ 6:30–7:30 PM',note:'',items:[mk('paneer',0),mk('atta',0),mk('veg',0),I('Cooking oil (measured)',10,'g','as-is',90,0,0,10,3)]}],
+ent:[],chk:[],rev:[]}}
+let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}S=S&&S.ex&&S.meals?Object.assign(defaults(),S):defaults();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+if(CLIENT){S.coach=0;if(!S.start){S.start=TODAY;save()}}
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num=v=>{v=parseFloat(v);return isFinite(v)&&v>=0?v:0},r0=v=>Math.round(v),r1=v=>Math.round(v*10)/10;
+const getP=p=>p.split('.').reduce((o,k)=>o&&o[k],S);
+const setP=(p,v)=>{const a=p.split('.');let o=S;for(let i=0;i<a.length-1;i++)o=o[a[i]]??(o[a[i]]={});o[a[a.length-1]]=v};
+const F=(p,l,v,t='text')=>`<label>${l}<input data-p="${p}" type="${t}" value="${esc(v)}" ${t=='number'?'min=0 step=any':''}></label>`;
+const TA=(p,l,v,ph='')=>`<label class="wide">${l}<textarea data-p="${p}" rows=2 placeholder="${esc(ph)}">${esc(v)}</textarea></label>`;
+const CK=(p,l,v)=>`<label class="ck"><input type="checkbox" data-p="${p}" ${v?'checked':''}> ${l}</label>`;
+const SEL=(p,l,v,o)=>`<label>${l}<select data-p="${p}">${o.map(x=>`<option ${x==v?'selected':''}>${x}</option>`).join('')}</select></label>`;
+const CO='<span class="badge b-coach">COACH ONLY</span>',CL='<span class="badge b-client">CLIENT</span>';
+const WEEKS=[['Week 1 · Baseline','Use the prescribed sets and RIR. Find honest working loads and note how the hip feels in each session.'],['Week 2 · Build','Keep the same loads. Aim to reach the top of each rep range with good technique.'],['Week 3 · Push (coach-approved)','Coach may add 1 set to 1–2 priority lifts if sleep, recovery and hip tolerance allow. The last set can go to RIR 1.'],['Week 4 · Deload & reassess','About 60% of the sets at RIR 3, holding loads. Review progress and hip tolerance, then set targets for the next block.']];
+const presc=(e,w)=>{const s=w==4?Math.max(1,Math.round(num(e.s)*.6)):num(e.s);return`<b>${s}</b> sets × <b>${esc(e.r)}</b> reps · RIR <b>${w==4?'3':esc(e.rir)}</b> · rest ${esc(e.rest)}`};
+/* nutrition */
+const mult=it=>num(it.bq)>0?num(it.q)/num(it.bq):0;
+function tot(items){const t={k:0,p:0,c:0,f:0,$:0};items.forEach(it=>{if(!it.on)return;const m=mult(it);t.k+=num(it.k)*m;t.p+=num(it.p)*m;t.c+=num(it.c)*m;t.f+=num(it.f)*m;t.$+=num(it.$)*m});return t}
+const dayT=()=>tot(S.meals.flatMap(m=>m.items));
+const tl=t=>`${r0(t.k)} kcal · P ${r1(t.p)} g · C ${r1(t.c)} g · F ${r1(t.f)} g · ₹${r0(t.$)}`;
+const iv=it=>{const t=tot([{...it,on:1}]);return`${tl(t)} ${it.e=='Label'?'(label data)':'<i>(estimate)</i>'}`};
+function ntot(){const t=dayT(),tc=Math.round((2150-4*105-9*65)/4);let h=`<div class="stats"><div class="stat"><b>${r0(t.k)}</b><span>kcal · target ≈2,100–2,200</span></div><div class="stat"><b>${r1(t.p)} g</b><span>protein · target 100–110 g</span></div><div class="stat"><b>${r1(t.f)} g</b><span>fat · target ≈60–70 g</span></div><div class="stat"><b>${r1(t.c)} g</b><span>carbs · remainder (≈${tc} g)</span></div><div class="stat"><b class="${t.$>200?'bad':''}">₹${r0(t.$)}</b><span>est. cost · budget ₹150–200</span></div></div>`;
+if(t.k<2100)h+=`<div class="alert"><b>Adjustment notice:</b> The meals below provide ${r0(t.k)} kcal, which is ${r0(2100-t.k)} kcal under the provisional 2,100 kcal target. Nothing has been changed automatically. Coach may add an editable item:<div class="row noprint" style="margin-top:8px">${SUG.map((s,i)=>`<button class="btn coachonly" data-sug="${i}">+ ${s[0]}</button>`).join('')}</div></div>`;
+else if(t.k>2200)h+=`<div class="alert"><b>Adjustment notice:</b> The meals provide ${r0(t.k)} kcal, above the provisional 2,200 kcal target. Review portions before changing anything.</div>`;
+if(t.p<100)h+=`<div class="alert"><b>Protein notice:</b> ${r1(t.p)} g is below the 100–110 g target. Consider an affordable protein source.</div>`;
+if(t.$>200)h+=`<div class="alert"><b>Budget notice:</b> Estimated cost is above ₹200/day. Review optional or costly foods (paneer, chicken, protein powder).</div>`;
+return h+`<p class="muted">All values are provisional estimates and depend on edited quantities. Validate against real intake and weight trend. Costs are editable estimates.</p>`}
+function calcN(){S.meals.forEach((m,mi)=>{m.items.forEach((it,i)=>{const e=document.getElementById(`iv-${mi}-${i}`);if(e)e.innerHTML=iv(it)});const e=document.getElementById('mt-'+mi);if(e)e.textContent=tl(tot(m.items))});const e=document.getElementById('ntot');if(e)e.innerHTML=ntot()}
+function nItem(m,i){const it=S.meals[m].items[i],P=`meals.${m}.items.${i}.`;
+return`<div class="ni ${it.on?'':'off'}"><div class="grid">${F(P+'n','Food',it.n)}${F(P+'q',`Quantity (${esc(it.u)})`,it.q,'number')}${SEL(P+'b','Weight basis (raw / cooked / each)',it.b,['raw','cooked','each','as-is'])}</div><div class="out" id="iv-${m}-${i}">${iv(it)}</div>
+${it.cat?`<label class="coachonly">Substitute<select data-sub="${m}.${i}"><option value="">— choose substitution —</option>${SUBS[it.cat].map((s,j)=>`<option value="${j}">${esc(s[0])}</option>`).join('')}</select></label>`:''}
+<div class="row">${CK(P+'on','Include in plan',it.on)}<button class="btn coachonly" data-del="meals.${m}.items:${i}">Remove</button></div>
+<details class="coachonly"><summary>Nutrition values and cost (edit / enter label data)</summary><div class="grid">${F(P+'bq','Values below are for this qty',it.bq,'number')}${F(P+'k','kcal',it.k,'number')}${F(P+'p','Protein g',it.p,'number')}${F(P+'c','Carbs g',it.c,'number')}${F(P+'f','Fat g',it.f,'number')}${F(P+'$','Cost ₹',it.$,'number')}${SEL(P+'e','Source',it.e,['Estimate','Label'])}</div></details></div>`}
+/* charts */
+function chart(t,pts,bar,u){pts=pts.filter(p=>p.d&&p.v!==''&&p.v!=null&&isFinite(p.v)).sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+if(pts.length<2)return`<div class="card"><h4>${t}</h4><p class="muted">Not enough data yet. Add at least 2 entries in Progress.</p></div>`;
+const W=560,H=220,L=44,R=12,T=16,B=34,vs=pts.map(p=>+p.v),n=pts.length;let mn=bar?0:Math.min(...vs),mx=Math.max(...vs);if(mx==mn){mx+=1;if(!bar)mn-=1}if(!bar){const pd=(mx-mn)*.15;mn-=pd;mx+=pd}
+const x=i=>bar?L+(W-L-R)*(i+.5)/n:L+(W-L-R)*i/(n-1),y=v=>T+(H-T-B)*(1-(v-mn)/(mx-mn));let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t}">`;
+for(let g=0;g<=4;g++){const v=mn+(mx-mn)*g/4;s+=`<line class="gl" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${L-6}" y="${y(v)+3}" text-anchor="end">${r1(v)}</text>`}
+if(bar){const bw=Math.min(40,(W-L-R)/n*.6);pts.forEach((p,i)=>{s+=`<rect class="bar" x="${x(i)-bw/2}" y="${y(+p.v)}" width="${bw}" height="${y(0)-y(+p.v)}"/>`})}
+else{s+=`<polyline class="ln" points="${pts.map((p,i)=>x(i)+','+y(+p.v)).join(' ')}"/>`;pts.forEach((p,i)=>{s+=`<circle class="dt" cx="${x(i)}" cy="${y(+p.v)}" r="4"/>`;if(n<=12)s+=`<text class="lb" x="${x(i)}" y="${y(+p.v)-9}" text-anchor="middle">${r1(+p.v)}</text>`})}
+const st=Math.ceil(n/6);pts.forEach((p,i)=>{if(i%st==0||i==n-1)s+=`<text class="ax" x="${x(i)}" y="${H-12}" text-anchor="middle">${p.d.slice(5)}</text>`});
+return`<div class="card"><h4>${t} <span class="muted">${u||''}</span></h4>${s}</svg></div>`}
+/* forms */
+const TR=['Down','Stable','Up','Unsure'];
+const ENT=[['d','Date','d'],['w','Morning weight (kg)','n'],['wa','Waist (in)','n'],['ar','Arm (cm)','n'],['wk','Workout completed',['Yes','Partial','No']],['ex','Exercise'],['ld','Load (kg)','n'],['st','Sets','n'],['rp','Reps','n'],['ri','RIR','n'],['ad','Nutrition adherence %','n','max=100'],['pr','Protein (g)','n'],['sp','Steps','n'],['sl','Sleep (h)','n','max=24'],['en','Energy (1–5)','n','max=5'],['ss','Stress (1–5)','n','max=5'],['hp','Hip symptoms / exercise tolerance','t'],['nt','Client notes','t']];
+const CHK=[['d','Check-in date','d'],['wn','Week',[1,2,3,4]],['ba','Best achievement','t'],['pa','Physical appearance (mirror, clothes fit, photos, how he looks and feels)','t'],['pl','Personal life (work, family, mood, stress, routine)','t'],['tc','Training consistency %','n','max=100'],['nc','Nutrition consistency %','n','max=100'],['wt','Body-weight trend',TR],['wst','Waist trend',TR],['at','Arm measurement trend',TR],['sc','Strength changes','t'],['sr','Sleep and recovery','t'],['hs','Hip symptoms or limitations','t'],['cf','Coach feedback','t'],['na',"Next week's actions",'t']];
+const REV=[['d','Review date','d'],['wt','Weight trend',TR],['wst','Waist trend',TR],['pg','Exercise progression','t'],['ad','Nutrition adherence %','n','max=100'],['rc','Recovery concerns','t'],['hp','Hip tolerance','t'],['tc','Changes to training','t'],['nc','Changes to nutrition','t'],['nr','Next review date','d'],['g','Goals for the following week','t']];
+const FM={ent:ENT,chk:CHK,rev:REV};
+const fm=id=>`<form data-f="${id}" class="card noprint"><div class="grid">${FM[id].map(([n,l,t,a])=>t=='t'?`<label class="wide">${l}<textarea name="${n}" rows=2></textarea></label>`:Array.isArray(t)?`<label>${l}<select name="${n}"><option value="">—</option>${t.map(o=>`<option>${o}</option>`).join('')}</select></label>`:`<label>${l}<input name="${n}" type="${t=='n'?'number':t=='d'?'date':'text'}" ${t=='n'?'min=0 step=any '+(a||''):''} ${t=='d'&&n=='d'?`value="${TODAY}"`:''}></label>`).join('')}</div><button class="btn pri" style="margin-top:10px">Save entry</button></form>`;
+const del=(k,i)=>`<button class="btn noprint" data-del="${k}:${i}" aria-label="Delete entry">Delete</button>`;
+function tbl(k){const fs=FM[k],rows=S[k].map((o,i)=>[o,i]).sort((a,b)=>a[0].d<b[0].d?1:-1);if(!rows.length)return'<p class="muted">No entries yet.</p>';
+return`<div class="tw"><table><tr>${fs.map(f=>`<th>${f[1]}</th>`).join('')}<th class="noprint"></th></tr>${rows.map(([o,i])=>`<tr>${fs.map(f=>`<td>${esc(o[f[0]])}</td>`).join('')}<td class="noprint">${del(k,i)}</td></tr>`).join('')}</table></div>`}
+function cards(k){const rows=S[k].map((o,i)=>[o,i]).sort((a,b)=>a[0].d<b[0].d?1:-1);if(!rows.length)return'<p class="muted">No entries yet.</p>';
+return rows.map(([o,i])=>`<div class="card"><h4>${esc(o.d)}</h4>${FM[k].slice(1).filter(f=>o[f[0]]!==''&&o[f[0]]!=null).map(f=>`<p style="margin:3px 0"><span class="muted">${f[1]}:</span> ${esc(o[f[0]])}</p>`).join('')}${k=='rev'?`<span class="coachonly">${del(k,i)}</span>`:del(k,i)}</div>`).join('')}
+/* tabs */
+let T='ov';
+const TABS=[['ov','Overview'],['tr','Training'],['nu','Nutrition'],['pg','Progress'],['wr','Weekly Review']];
+function secOv(){const t=dayT(),P=[['Name','Naren Kundalia'],['Age / Gender','32 / Male'],['Height · Weight · Waist','176 cm · 74 kg · 34 in'],['Occupation','Business'],['Experience','Advanced · recent strength training'],['Training','Gym · 5 days/week · 60 min · 4–5 PM'],['Injury consideration','Hip arthritis'],['Medical / medication','None reported'],['Diet','Non-vegetarian, Indian-style · prepared by family'],['Food budget · meals','₹150–200/day · 4 meals'],['Daily schedule','Wake 7 AM · Work 9 AM–3 PM · Bed 11 PM'],['Sleep · Stress','5–6 h reported · Moderate'],['Coaching preference','Supportive']];
+return`<h2>Overview</h2><div class="alert"><b>Hip arthritis — important:</b> Exercise tolerance is individual. Stop or modify any movement that provokes hip pain and seek professional guidance. Exercises marked "hip: flagged" need clinician or coach approval. This dashboard does not diagnose, treat or cure arthritis.</div>
+<div class="two"><div class="card"><h3>Client profile</h3><table>${P.map(r=>`<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('')}</table></div>
+<div><div class="card"><h3>Goals</h3><p>Primary: <b>fat loss, muscle gain and strength</b>. Training is built around arm priority, with hip-tolerant lower-body work.</p></div>
+<div class="card"><h3>Initial targets <span class="muted">(provisional)</span></h3><table><tr><th>Calories</th><td>≈2,100–2,200 kcal/day, to be validated against real intake and weight trend</td></tr><tr><th>Protein</th><td>100–110 g/day</td></tr><tr><th>Fat</th><td>≈60–70 g/day</td></tr><tr><th>Carbs</th><td>Remaining calories</td></tr><tr><th>Steps</th><td>Gradually toward 8,000–10,000/day only if hip symptoms allow</td></tr><tr><th>Cardio</th><td>Optional low-impact, according to tolerance and professional guidance</td></tr><tr><th>Sleep</th><td>Gradually build from 5–6 h toward 7–9 h where feasible</td></tr></table>
+<p class="muted">Current meal plan totals: ${tl(t)}</p></div></div></div>
+<div class="card"><h3>4-week roadmap</h3><div class="tw"><table><tr><th>Week</th><th>Training</th><th>Nutrition / recovery</th></tr>
+<tr><td>1 Baseline</td><td>${WEEKS[0][1]}</td><td>Follow the plan and log weight, intake, sleep and hip notes. No target changes.</td></tr>
+<tr><td>2 Build</td><td>${WEEKS[1][1]}</td><td>Coach reviews weight trend and adherence against the calorie estimate.</td></tr>
+<tr><td>3 Push</td><td>${WEEKS[2][1]}</td><td>Adjust food only if the coach decides after review. Build steps gradually if the hip allows.</td></tr>
+<tr><td>4 Deload</td><td>${WEEKS[3][1]}</td><td>Prioritize sleep and recovery. Full check-in and plan for the next block.</td></tr></table></div></div>
+<div class="card coachonly"><h3>Coaching notes ${CO}</h3><div class="grid">${TA('notes','Notes',S.notes,'Supportive coaching notes, hip tolerance, constraints…')}</div></div>`}
+function secTr(){const w=S.week,d=S.day;
+return`<h2>Training program</h2><div class="alert"><b>Hip safety:</b> Stop or modify any pain-provoking movement and seek professional guidance. Flagged exercises need approval before use.</div>
+<div class="row" style="margin-bottom:10px">${[1,2,3,4].map(i=>`<button class="btn ${w==i?'pri':''}" data-act="w${i}">Week ${i}</button>`).join('')}</div>
+<div class="note"><b>${WEEKS[w-1][0]}</b><br>${WEEKS[w-1][1]}<br><span class="muted">Progression rule: increase reps within the prescribed range first. Increase load only after all working sets reach the top of the range with good technique and target RIR. Loads never increase automatically.</span></div>
+<div class="row" style="margin-bottom:10px">${['Arms + Chest','Lower A','Back + Biceps','Chest + Shoulders + Triceps','Lower B + Arms'].map((n,i)=>`<button class="btn ${d==i+1?'pri':''}" data-act="d${i+1}">Day ${i+1}<br><small>${n}</small></button>`).join('')}</div>
+${S.ex[d].map((e,i)=>exCard(d,i,w)).join('')}<div class="stat"><b id="sv">${r0(sessV(w,d))} kg</b><span>Session volume this week (sum of load × reps, all logged sets)</span></div>${TA(`sn.w${w}d${d}`,'Session notes',S.sn[`w${w}d${d}`]||'')}`}
+const nSets=(e,w)=>w==4?Math.max(1,Math.round(num(e.s)*.6)):num(e.s);
+function setRows(d,i,w){const e=S.ex[d][i],k=`w${w}d${d}_${i}`,L=S.lg[k]||{};let h='';for(let j=1;j<=Math.min(nSets(e,w),12);j++){const s=L['s'+j]||(j==1&&L.ld!==undefined?L:{}),P=`lg.${k}.s${j}.`;h+=`<div class="sr"><b>Set ${j}</b>${F(P+'ld','Load (kg)',s.ld??'','number')}${F(P+'rp','Reps done',s.rp??'','number')}${F(P+'ri','RIR',s.ri??'','number')}</div>`}return h}
+function vol(w,d,i){const L=S.lg[`w${w}d${d}_${i}`]||{};let v=0,r=0,n=0;for(let j=1;j<=12;j++){const s=L['s'+j];if(s&&num(s.rp)>0){n++;r+=num(s.rp);v+=num(s.ld)*num(s.rp)}}return{v,r,n}}
+const volTxt=(d,i,w)=>{const t=vol(w,d,i);return t.n?`Logged: ${t.n} set(s) · ${r0(t.r)} total reps · volume ${r0(t.v)} kg`:'No sets logged yet'};
+const sessV=(w,d)=>S.ex[d].reduce((s,e,i)=>s+(e.on?vol(w,d,i).v:0),0);
+function exCard(d,i,w){const e=S.ex[d][i],k=`w${w}d${d}_${i}`,L=S.lg[k]||{},P=`ex.${d}.${i}.`;
+return`<div class="ex ${e.on?'':'off'}"><h4>${i+1}. ${esc(e.n)}${e.hip?'<span class="tag warn">Hip: flagged for review</span>':''}${e.on?'':'<span class="tag">Disabled by coach</span>'}</h4><div class="pres" id="pr-${d}-${i}">${presc(e,w)}</div>
+<p class="muted">Cue: ${esc(e.cue)} · Alternative: ${esc(e.alt)}</p>
+<div class="coachonly card" style="background:var(--c2)">${CO}<div class="grid" style="margin-top:8px">${F(P+'n','Exercise',e.n)}${F(P+'s','Sets',e.s,'number')}${F(P+'r','Reps',e.r)}${F(P+'rir','Target RIR',e.rir)}${F(P+'rest','Rest',e.rest)}${F(P+'cue','Coaching cue',e.cue)}${F(P+'alt','Approved alternative / substitution',e.alt)}</div><div class="row">${CK(P+'on','Enabled',e.on)}${CK(P+'hip','Flag hip symptoms for review',e.hip)}</div></div>
+<div id="sr-${d}-${i}">${setRows(d,i,w)}</div><div class="out" id="vol-${d}-${i}">${volTxt(d,i,w)}</div></div>`}
+function secNu(){return`<h2>Nutrition plan</h2><div id="ntot">${ntot()}</div>
+<div class="note">Indian-style meals aligned to the 7 AM wake-up and 4–5 PM training. Each food shows whether the weight is raw or cooked. Protein powder stays off until the coach enters label data.</div>
+${S.meals.map((m,mi)=>`<div class="card"><h3>${m.n} <span class="muted">${m.t}</span></h3><div class="out" id="mt-${mi}">${tl(tot(m.items))}</div>${m.items.map((_,i)=>nItem(mi,i)).join('')}<div class="coachonly row"><button class="btn" data-add="${mi}">+ Add food</button></div><div class="coachonly">${TA(`meals.${mi}.note`,'Coach note'+(mi==0?' — clarify the exact breakfast product (oats/muesli, 50 g portion, milk, mixed protein, paneer)':''),m.note)}</div></div>`).join('')}`}
+const wkOf=d=>{if(!S.start||!d)return 0;const n=Math.floor((new Date(d)-new Date(S.start))/864e5),w=Math.floor(n/7)+1;return n>=0&&w<=4?w:0};
+const av=a=>{a=a.filter(v=>v!==''&&v!=null&&isFinite(v)).map(Number);return a.length?a.reduce((x,v)=>x+v,0)/a.length:null};
+const fv=(v,u='')=>v==null?'—':r1(v)+u,dl=(a,b,u='')=>a==null||b==null?'—':(a-b>0?'+':'')+r1(a-b)+u;
+const pbar=p=>`<div class="pb"><i style="width:${Math.max(0,Math.min(100,p||0))}%"></i></div>`;
+function agg(w){const E=S.ent.filter(o=>wkOf(o.d)==w),g=k=>av(E.map(o=>o[k]));let ses=0,sets=0,v=0,r=0;for(let d=1;d<=5;d++){let any=0;S.ex[d].forEach((e,i)=>{const t=vol(w,d,i);if(t.n){any=1;sets+=t.n;v+=t.v;r+=t.r}});ses+=any}
+const c=S.chk.filter(o=>+o.wn==w).sort((a,b)=>a.d<b.d?1:-1)[0]||null;let ad=g('ad');if(ad==null&&c&&c.nc!=='')ad=+c.nc;
+return{w,ses,sets,v,r,wt:g('w'),wa:g('wa'),ar:g('ar'),ad,pr:g('pr'),sp:g('sp'),sl:g('sl'),en:g('en'),ss:g('ss'),c}}
+function wkCard(a,A){const pv=A[a.w-2],b0=A.find(x=>x.wt!=null),w0=A.find(x=>x.wa!=null),a0=A.find(x=>x.ar!=null),c=a.c;
+return`<div class="wk"><h4>Week ${a.w}${S.week==a.w?'<span class="tag">Current</span>':''}</h4>
+<h5>Weight training</h5>${pbar(a.ses/5*100)}<p>Sessions logged: <b>${a.ses} / 5</b></p><p>Sets logged: <b>${a.sets}</b> · Reps: <b>${r0(a.r)}</b></p><p>Volume: <b>${r0(a.v)} kg</b>${pv&&pv.v>0&&a.v>0?` (${dl(a.v/pv.v*100,100,'%')} vs last week)`:''}</p>
+<h5>Diet</h5>${pbar(a.ad)}<p>Adherence: <b>${fv(a.ad,'%')}</b></p><p>Avg protein: <b>${fv(a.pr,' g')}</b> <span class="muted">(target 100–110 g)</span></p>
+<h5>Physical appearance</h5><p>Weight: <b>${fv(a.wt,' kg')}</b> <span class="muted">(${b0&&b0.w!=a.w?dl(a.wt,b0.wt,' kg')+' since wk '+b0.w:'baseline'})</span></p><p>Waist: <b>${fv(a.wa,' in')}</b> <span class="muted">(${w0&&w0.w!=a.w?dl(a.wa,w0.wa,' in'):'baseline'})</span></p><p>Arm: <b>${fv(a.ar,' cm')}</b> <span class="muted">(${a0&&a0.w!=a.w?dl(a.ar,a0.ar,' cm'):'baseline'})</span></p>${c&&c.pa?`<p class="muted">${esc(c.pa)}</p>`:''}
+<h5>Personal life &amp; recovery</h5>${pbar(a.sl!=null?a.sl/8*100:0)}<p>Sleep: <b>${fv(a.sl,' h')}</b> <span class="muted">(goal 7–9 h)</span></p><p>Energy: <b>${fv(a.en,'/5')}</b> · Stress: <b>${fv(a.ss,'/5')}</b> · Steps: <b>${a.sp==null?'—':r0(a.sp)}</b></p>${c&&c.pl?`<p class="muted">${esc(c.pl)}</p>`:''}
+<div class="cn">${c?`<p><b>Best achievement:</b> ${esc(c.ba||'—')}</p><p><b>Coach feedback:</b> ${esc(c.cf||'—')}</p><p><b>Next actions:</b> ${esc(c.na||'—')}</p>`:'Weekly check-in not submitted yet.'}</div></div>`}
+function secDash(){const A=[1,2,3,4].map(agg),L=A.filter(a=>a.wt!=null),W=A.filter(a=>a.wa!=null),ses=A.reduce((x,a)=>x+a.ses,0),V=A.reduce((x,a)=>x+a.v,0),ad=av(A.map(a=>a.ad)),
+P=(f,u)=>A.filter(a=>a[f]>0||f=='v'&&a.v>0).map(a=>({d:'xxxxxW'+a.w,v:a[f]}));
+return`<h3>4-week progress dashboard ${CL}</h3>
+<div class="coachonly card" style="margin-bottom:12px">${CO}<div class="grid">${F('start','Program start date (groups daily entries into Weeks 1–4)',S.start,'date')}</div></div>
+${S.start?'':'<p class="muted">Weeks for daily entries (weight, diet, sleep) are counted from the program start date, which the coach sets. Training sets are grouped by the Week selected in Training.</p>'}
+<div class="stats"><div class="stat"><b>${ses} / 20</b><span>Sessions logged</span></div><div class="stat"><b>${r0(V)} kg</b><span>Total training volume</span></div><div class="stat"><b>${fv(ad,'%')}</b><span>Avg diet adherence</span></div><div class="stat"><b>${L.length>1?dl(L[L.length-1].wt,L[0].wt,' kg'):'—'}</b><span>Weight change since first week</span></div><div class="stat"><b>${W.length>1?dl(W[W.length-1].wa,W[0].wa,' in'):'—'}</b><span>Waist change since first week</span></div></div>
+<div class="dash">${A.map(a=>wkCard(a,A)).join('')}</div>
+<div class="two">${chart('Weekly training volume',P('v'),1,'kg')}${chart('Weekly avg weight',P('wt'),0,'kg')}${chart('Weekly diet adherence',P('ad'),0,'%')}${chart('Weekly avg sleep',P('sl'),0,'hours')}</div>
+<p class="muted">Only entered data is shown. Weeks with no data show a dash. Provisional guidance only; your coach reviews the trends.</p>`}
+function secPg(){const E=S.ent,P=k=>E.map(o=>({d:o.d,v:o[k]})),exs=[...new Set(E.filter(o=>o.ex).map(o=>o.ex))],cx=exs.includes(S.cx)?S.cx:(exs[0]||'');
+const wd=E.filter(o=>o.w!==''&&o.w!=null&&o.d).sort((a,b)=>a.d<b.d?1:-1);let wa='';if(wd.length){const d0=new Date(wd[0].d),inR=(a,b)=>wd.filter(o=>{const df=(d0-new Date(o.d))/864e5;return df>=a&&df<b}),c=inR(0,7),p=inR(7,14),av=a=>a.reduce((s,o)=>s+num(o.w),0)/a.length;
+wa=`<div class="stats"><div class="stat"><b>${r1(av(c))} kg</b><span>Weekly average (last 7 days, ${c.length} entries)</span></div>${p.length?`<div class="stat"><b>${r1(av(c)-av(p))} kg</b><span>Change vs previous 7 days</span></div>`:''}</div>`}
+return`<h2>Progress tracking</h2>${secDash()}<h3>Daily log ${CL}</h3>${fm('ent')}<div class="card"><h3>Entries</h3>${tbl('ent')}</div>${wa}
+<div class="two">${chart('Body weight',P('w'),0,'kg')}${chart('Waist',P('wa'),0,'in')}${chart('Arm measurement',P('ar'),0,'cm')}
+<div>${exs.length?SEL('cx','Exercise to chart',cx,exs):''}${chart('Exercise load: '+(cx||'none selected'),E.filter(o=>o.ex==cx).map(o=>({d:o.d,v:o.ld})),0,'kg')}</div>
+${chart('Workout completion (Yes=1, Partial=0.5, No=0)',E.filter(o=>o.wk).map(o=>({d:o.d,v:{Yes:1,Partial:.5,No:0}[o.wk]})),1)}${chart('Nutrition adherence',P('ad'),0,'%')}${chart('Sleep',P('sl'),0,'hours')}</div>
+<h3>Weekly check-in ${CL}</h3>${fm('chk')}${cards('chk')}`}
+function secWr(){return`<h2>Weekly review</h2><div class="note">Your coach's weekly reviews are shared here so your progress is transparent. Reviews support coaching decisions; nothing changes your plan automatically.</div>${secDash()}<div class="coachonly">${CO}${fm('rev')}</div>${cards('rev')}`}
+function render(){const y=scrollY;document.body.classList.toggle('coach',!!S.coach);document.getElementById('cm').checked=!!S.coach;
+document.getElementById('nav').innerHTML=TABS.map(t=>`<button class="${T==t[0]?'on':''}" data-t="${t[0]}">${t[1]}</button>`).join('');
+const s={ov:secOv,tr:secTr,nu:secNu,pg:secPg,wr:secWr};document.getElementById('app').innerHTML=TABS.map(t=>`<section class="tab ${T==t[0]?'on':''}">${s[t[0]]()}</section>`).join('');scrollTo(0,y)}
+/* events */
+function live(p){const a=p.split('.');if(a[0]=='ex'){const e=document.getElementById(`pr-${a[1]}-${a[2]}`);if(e)e.innerHTML=presc(S.ex[a[1]][a[2]],S.week);if(a[3]=='s'){const c=document.getElementById(`sr-${a[1]}-${a[2]}`);if(c)c.innerHTML=setRows(a[1],a[2],S.week)}}else if(a[0]=='lg'){const m=/^w(\d)d(\d)_(\d+)$/.exec(a[1]);if(m){const v=document.getElementById(`vol-${m[2]}-${m[3]}`);if(v)v.textContent=volTxt(m[2],m[3],m[1]);const sv=document.getElementById('sv');if(sv&&+m[1]==S.week&&+m[2]==S.day)sv.textContent=r0(sessV(S.week,S.day))+' kg'}}else if(a[0]=='meals')calcN()}
+document.addEventListener('input',e=>{const t=e.target,p=t.dataset.p;if(!p||t.type=='checkbox'||t.tagName=='SELECT')return;setP(p,t.type=='number'?(t.value===''?'':Math.max(0,+t.value)):t.value);save();live(p);if(p=='start')render()});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.sub){const[m,i]=t.dataset.sub.split('.').map(Number),it=S.meals[m].items[i];if(t.value!==''){const n=mk(it.cat,+t.value);n.on=it.on;S.meals[m].items[i]=n;save();render()}return}
+const p=t.dataset.p;if(!p||(t.type!='checkbox'&&t.tagName!='SELECT'))return;setP(p,t.type=='checkbox'?(t.checked?1:0):(isNaN(+t.value)||t.value===''?t.value:(['cx'].includes(p)?t.value:t.value)));save();render()});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const D=b.dataset;
+if(D.t){T=D.t;render();scrollTo(0,0)}else if(/^w\d$/.test(D.act||'')){S.week=+D.act[1];save();render()}else if(/^d\d$/.test(D.act||'')){S.day=+D.act[1];save();render()}
+else if(D.act=='prt')print();else if(D.act=='exp'){const fn='Naren_plan_from_coach_'+TODAY+'.json',data=JSON.stringify(S,null,2);(window.claude&&claude.use?claude.use('downloads'):Promise.resolve(null)).then(d=>{if(!d){alert('Saving files is not available in this view.');return}return d.save({filename:fn,data}).catch(()=>{})})}
+else if(D.act=='imp')document.getElementById('fi').click();
+else if(D.act=='rst'){if(confirm('Reset ALL data in this browser to the starting program? This cannot be undone. Export first if unsure.')){S=defaults();save();render()}}
+else if(D.del){const[p,i]=D.del.split(':'),a=getP(p);if(a&&confirm('Delete this item?')){a.splice(+i,1);save();render()}}
+else if(D.add!==undefined){S.meals[+D.add].items.push(I('New food',100,'g','as-is',0,0,0,0,0));save();render()}
+else if(D.sug!==undefined){const s=SUG[+D.sug];S.meals[s[1]].items.push(s[2]());save();render()}});
+document.getElementById('fi').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;if(!confirm('Importing replaces the data on this device with the data in the file. Continue?')){e.target.value='';return}const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(!o||!o.ex||!o.meals||!Array.isArray(o.ent))throw 0;S=Object.assign(defaults(),o);S.coach=1;save();render();alert('Data imported.')}catch(x){alert('Could not import: this is not a valid ASC data file.')}};r.readAsText(f);e.target.value=''});
+document.addEventListener('submit',e=>{const f=e.target,id=f.dataset.f;if(!id)return;e.preventDefault();const fs=FM[id],o={};fs.forEach(([n,,t])=>{let v=f.elements[n].value.trim();if(t=='n')v=v!==''&&isFinite(+v)?Math.max(0,+v):'';o[n]=v});if(!o.d){alert('Please enter a date.');return}S[id].push(o);save();render()});
+render();
+</script></body></html>
